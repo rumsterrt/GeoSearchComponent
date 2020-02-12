@@ -62,6 +62,7 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
     const [searchTimeout, setSearchTimeout] = React.useState(null)
     //option that was picked, view it inside input, while new typing start
     const [pickedOption, setPickedOption] = React.useState(initPicked)
+    const [isLoading, setIsLoading] = React.useState(false)
 
     const handleChange = e => {
         setPickedOption({})
@@ -74,15 +75,23 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
         }
 
         const newTimeout = setTimeout(() => {
-            loadOptions(newValue).then(options => {
-                setOptions(options)
-                setSearchTimeout(null)
-            })
+            setIsLoading(true)
+            loadOptions(newValue)
+                .then(options => {
+                    setOptions(options)
+                })
+                .catch(e => {
+                    setOptions([])
+                })
+                .finally(() => {
+                    setSearchTimeout(null)
+                    setIsLoading(false)
+                })
         }, 1000)
         setSearchTimeout(newTimeout)
     }
 
-    const open = Boolean(anchorEl) && options.length > 0 && popupOpen
+    const open = (Boolean(anchorEl) && options.length > 0 && popupOpen) || isLoading
 
     return (
         <ClickAwayListener
@@ -112,6 +121,7 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
                     >
                         <Box boxShadow={1}>
                             <ListBox>
+                                {isLoading && <Option>Loading...</Option>}
                                 {options.map((option, index) => (
                                     <Option
                                         key={index}

@@ -3,7 +3,6 @@ import SearchTab from 'components/searchTab'
 import EditTab from 'components/editTab'
 import ViewTab from 'components/viewTab'
 
-import { makeStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
@@ -11,15 +10,6 @@ import StepContent from '@material-ui/core/StepContent'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-    },
-    button: {
-        marginRight: theme.spacing(1),
-    },
-}))
 
 function getSteps() {
     return ['Search address', 'Edit address structure', 'You object!']
@@ -32,7 +22,7 @@ function getStepsContent(activeStep) {
         case 1:
             return { render: props => <EditTab {...props} />, back: true }
         case 2:
-            return { render: props => <ViewTab {...props} />, reset: true }
+            return { render: props => <ViewTab {...props} />, back: true, reset: true }
         default:
             return { render: <div>Nothing</div> }
     }
@@ -40,10 +30,12 @@ function getStepsContent(activeStep) {
 
 export default function HorizontalLinearStepper() {
     const isMobile = useMediaQuery('(max-width: 600px)')
-    const classes = useStyles()
+
     const [activeStep, setActiveStep] = React.useState(0)
+
     const steps = getSteps()
     const stepContent = getStepsContent(activeStep)
+
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1)
     }
@@ -60,18 +52,14 @@ export default function HorizontalLinearStepper() {
         <>
             {stepContent.render({ onSubmit: handleNext })}
             <Box display="flex" width="100%" alignItems="center" justifyContent="center">
-                {stepContent.reset && (
-                    <Button onClick={handleReset} className={classes.button}>
-                        Reset
-                    </Button>
-                )}
+                {stepContent.reset && <Button onClick={handleReset}>Reset</Button>}
                 {stepContent.back && (
-                    <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                    <Button disabled={activeStep === 0} onClick={handleBack}>
                         Back
                     </Button>
                 )}
                 {stepContent.next && (
-                    <Button variant="contained" color="primary" onClick={handleNext} className={classes.button}>
+                    <Button variant="contained" color="primary" onClick={handleNext}>
                         Next
                     </Button>
                 )}
@@ -80,7 +68,7 @@ export default function HorizontalLinearStepper() {
     )
 
     return (
-        <div className={classes.root}>
+        <Box width="100%">
             <Stepper activeStep={activeStep} orientation={isMobile ? 'vertical' : 'horizontal'}>
                 {steps.map((label, index) => (
                     <Step key={label}>
@@ -90,6 +78,6 @@ export default function HorizontalLinearStepper() {
                 ))}
             </Stepper>
             {!isMobile && content}
-        </div>
+        </Box>
     )
 }

@@ -7,30 +7,46 @@ export const getInitState = () => ({
         street_number: '',
         room_type: '',
         room: '',
+
+        isLoading: false,
     },
-    search: {
-        options: [],
-        pickedOption: {},
-    },
+    pickedOption: {},
 })
 
 export const reducer = (state = getInitState(), action) => {
     const payload = action.payload
-    console.log('action', { action, state })
 
     switch (action.type) {
-        case 'SET_ADDRESS_DATA':
+        case 'SET_ADDRESS_REQUEST':
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    isLoading: true,
+                },
+            }
+        case 'SET_ADDRESS_SUCCESS':
             return {
                 ...state,
                 form: {
                     ...state.form,
                     ...payload.data,
+                    isLoading: false,
                 },
-                search: {
-                    ...state.search,
-                    pickedOption: payload.pickedOption,
+                pickedOption: payload.pickedOption,
+            }
+        case 'SET_ADDRESS_FAILURE':
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    isLoading: true,
                 },
             }
+
+        case 'RESET_DATA':
+            return getInitState()
+
         default:
             return state
     }

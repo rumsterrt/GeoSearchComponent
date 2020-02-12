@@ -11,16 +11,25 @@ const SearchPage = () => {
     const [state, dispatch] = React.useContext(storeContext)
 
     const onClickOption = option => {
-        getAddressData(option.id).then(data => {
-            dispatch({
-                type: 'SET_ADDRESS_DATA',
-                payload: { data, pickedOption: option },
-            })
+        dispatch({
+            type: 'SET_ADDRESS_REQUEST',
         })
+        getAddressData(option.id)
+            .then(data => {
+                dispatch({
+                    type: 'SET_ADDRESS_SUCCESS',
+                    payload: { data, pickedOption: option },
+                })
+            })
+            .catch(e => {
+                dispatch({
+                    type: 'SET_ADDRESS_FAILURE',
+                })
+            })
     }
 
-    const pickedOption = _get(state, 'search.pickedOption', {})
-    console.log('pickedOption', pickedOption)
+    const pickedOption = _get(state, 'pickedOption', {})
+
     return (
         <TabWrapper>
             <SearchInput
@@ -29,6 +38,7 @@ const SearchPage = () => {
                 initPicked={pickedOption}
                 loadOptions={searchQuery}
                 onClickOption={onClickOption}
+                label={'Search address'}
             />
             {pickedOption.address && <Typography>{`You choose: ${pickedOption.address}`}</Typography>}
         </TabWrapper>

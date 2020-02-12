@@ -8,7 +8,7 @@ const EditAddress = ({ onSubmit = () => {} }) => {
     const [state, dispatch] = React.useContext(storeContext)
     const handleSubmit = values => {
         dispatch({
-            type: 'SET_ADDRESS_DATA',
+            type: 'SET_ADDRESS_SUCCESS',
             payload: { data: values },
         })
         onSubmit()
