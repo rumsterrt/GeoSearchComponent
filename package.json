@@ -1,51 +1,62 @@
 {
-  "name": "geo_search_component",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.41",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "config": "^3.2.5",
-    "formik": "^2.1.4",
-    "lodash": "^4.17.15",
-    "notistack": "^0.9.7",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.1",
-    "styled-components": "^5.0.1",
-    "yup": "^0.28.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-config-react-app": "^5.2.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
-  }
+    "name": "geo-search-component",
+    "version": "0.1.0",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rumsterrt/geo-search-component"
+    },
+    "description": "Google Place API, React Search place form",
+    "author": "Anatoly Ryumkin <rumsterrt@gmail.com>",
+    "homepage": "https://rumsterrt.github.io/geo-search-component",
+    "license": "ISC",
+    "dependencies": {
+        "@material-ui/core": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.41",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.4.0",
+        "@testing-library/user-event": "^7.2.1",
+        "axios": "^0.19.2",
+        "config": "^3.2.5",
+        "formik": "^2.1.4",
+        "lodash": "^4.17.15",
+        "notistack": "^0.9.7",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-scripts": "3.3.1",
+        "styled-components": "^5.0.1",
+        "yup": "^0.28.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.3",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-config-react-app": "^5.2.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "gh-pages": "^2.2.0",
+        "prettier": "^1.19.1"
+    }
 }
