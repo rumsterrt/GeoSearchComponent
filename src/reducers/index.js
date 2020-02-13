@@ -42,6 +42,7 @@ export const reducer = (state = getInitState(), action) => {
                     ...state.form,
                     isLoading: true,
                 },
+                pickedOption: {},
             }
 
         case 'RESET_DATA':

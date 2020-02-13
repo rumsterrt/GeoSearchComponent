@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider } from './store'
 import { reducer, getInitState } from './reducers'
 import { MainPage } from 'pages'
+import { SnackbarProvider } from 'notistack'
 
 import { ThemeProvider } from 'styled-components'
 import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
@@ -18,9 +19,11 @@ function App() {
         <Provider value={useState}>
             <MuiThemeProvider theme={customTheme}>
                 <ThemeProvider theme={customTheme}>
-                    <Container maxWidth={matches ? 'md' : false} disableGutters={!matches}>
-                        <MainPage />
-                    </Container>
+                    <SnackbarProvider maxSnack={3}>
+                        <Container maxWidth={matches ? 'md' : false} disableGutters={!matches}>
+                            <MainPage />
+                        </Container>
+                    </SnackbarProvider>
                 </ThemeProvider>
             </MuiThemeProvider>
         </Provider>

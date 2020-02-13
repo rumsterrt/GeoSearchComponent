@@ -1,7 +1,6 @@
 import React from 'react'
 
 import TextField from '@material-ui/core/TextField'
-import Box from '@material-ui/core/Box'
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import styled from 'styled-components'
@@ -21,6 +20,7 @@ const Popper = styled.div`
         background-color: ${theme.palette.background.paper};
         max-height: 300px;
         overflow-y: auto;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
     `}
 `
 
@@ -54,7 +54,7 @@ const Option = styled.li`
     `}
 `
 
-const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOption, ...props }) => {
+const SearchInput = ({ initOptions = null, initPicked = {}, loadOptions, onClickOption, ...props }) => {
     const [value, setValue] = React.useState('')
     const [options, setOptions] = React.useState(initOptions)
     const [anchorEl, setAnchorEl] = React.useState(null)
@@ -81,7 +81,7 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
                     setOptions(options)
                 })
                 .catch(e => {
-                    setOptions([])
+                    setOptions(null)
                 })
                 .finally(() => {
                     setSearchTimeout(null)
@@ -91,7 +91,7 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
         setSearchTimeout(newTimeout)
     }
 
-    const open = (Boolean(anchorEl) && options.length > 0 && popupOpen) || isLoading
+    const open = (Boolean(anchorEl) && options && popupOpen) || isLoading
 
     return (
         <ClickAwayListener
@@ -119,10 +119,11 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
                         open
                         anchorEl={anchorEl}
                     >
-                        <Box boxShadow={1}>
-                            <ListBox>
-                                {isLoading && <Option>Loading...</Option>}
-                                {options.map((option, index) => (
+                        <ListBox>
+                            {isLoading && <Option>Loading...</Option>}
+                            {options && options.length === 0 && !isLoading && <Option>Empty</Option>}
+                            {options &&
+                                options.map((option, index) => (
                                     <Option
                                         key={index}
                                         onClick={() => {
@@ -134,8 +135,7 @@ const SearchInput = ({ initOptions = [], initPicked = {}, loadOptions, onClickOp
                                         {option.address}
                                     </Option>
                                 ))}
-                            </ListBox>
-                        </Box>
+                        </ListBox>
                     </Popper>
                 )}
             </Wrapper>

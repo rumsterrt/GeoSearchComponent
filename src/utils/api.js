@@ -28,12 +28,15 @@ const dataParser = (() => {
 })()
 
 export const searchQuery = query =>
-    new Promise(resolve => {
+    new Promise((resolve, reject) => {
         service.textSearch(
             {
                 query,
             },
-            response => {
+            (response, status) => {
+                if (status === window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+                    reject()
+                }
                 resolve(
                     response.map(({ formatted_address, place_id }) => ({
                         address: formatted_address,
@@ -45,8 +48,11 @@ export const searchQuery = query =>
     })
 
 export const getAddressData = placeId =>
-    new Promise(resolve => {
-        service.getDetails({ placeId, fields: ['address_component'] }, response => {
+    new Promise((resolve, reject) => {
+        service.getDetails({ placeId, fields: ['address_component'] }, (response, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+                reject()
+            }
             resolve(dataParser(_get(response, 'address_components', [])))
         })
     })
