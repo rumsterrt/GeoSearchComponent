@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/geo-search-component/static/js/main.d7a86d63.chunk.js",
+    "main.js.map": "/geo-search-component/static/js/main.d7a86d63.chunk.js.map",
+    "runtime-main.js": "/geo-search-component/static/js/runtime-main.e325d294.js",
+    "runtime-main.js.map": "/geo-search-component/static/js/runtime-main.e325d294.js.map",
+    "static/js/2.54b35c95.chunk.js": "/geo-search-component/static/js/2.54b35c95.chunk.js",
+    "static/js/2.54b35c95.chunk.js.map": "/geo-search-component/static/js/2.54b35c95.chunk.js.map",
+    "index.html": "/geo-search-component/index.html",
+    "precache-manifest.9e05c7a2644e19ff15b2d81f077cdd14.js": "/geo-search-component/precache-manifest.9e05c7a2644e19ff15b2d81f077cdd14.js",
+    "service-worker.js": "/geo-search-component/service-worker.js",
+    "static/js/2.54b35c95.chunk.js.LICENSE.txt": "/geo-search-component/static/js/2.54b35c95.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e325d294.js",
+    "static/js/2.54b35c95.chunk.js",
+    "static/js/main.d7a86d63.chunk.js"
+  ]
+}
