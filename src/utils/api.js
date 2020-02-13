@@ -29,16 +29,17 @@ const dataParser = (() => {
 
 export const searchQuery = query =>
     new Promise((resolve, reject) => {
-        service.textSearch(
+        service.findPlaceFromQuery(
             {
                 query,
+                fields: ['formatted_address', 'place_id'],
             },
             (response, status) => {
                 if (status === window.google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
                     reject()
                 }
                 resolve(
-                    response.map(({ formatted_address, place_id }) => ({
+                    (response || []).map(({ formatted_address, place_id }) => ({
                         address: formatted_address,
                         id: place_id,
                     })),

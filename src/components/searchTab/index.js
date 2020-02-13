@@ -49,7 +49,9 @@ const SearchPage = () => {
                 onClickOption={onClickOption}
                 label={'Search address'}
             />
-            {pickedOption.address && <Typography>{`You choose: ${pickedOption.address}`}</Typography>}
+            {pickedOption.address && (
+                <Typography style={{ marginTop: '20px' }} gutterTop>{`You choose: ${pickedOption.address}`}</Typography>
+            )}
         </TabWrapper>
     )
 }

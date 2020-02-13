@@ -2,6 +2,7 @@ import React from 'react'
 import SearchTab from 'components/searchTab'
 import EditTab from 'components/editTab'
 import ViewTab from 'components/viewTab'
+import storeContext from 'store'
 
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -29,6 +30,7 @@ function getStepsContent(activeStep) {
 }
 
 export default function HorizontalLinearStepper() {
+    const [state, dispatch] = React.useContext(storeContext)
     const isMobile = useMediaQuery('(max-width: 600px)')
 
     const [activeStep, setActiveStep] = React.useState(0)
@@ -45,6 +47,9 @@ export default function HorizontalLinearStepper() {
     }
 
     const handleReset = () => {
+        dispatch({
+            type: 'RESET_DATA',
+        })
         setActiveStep(0)
     }
 
