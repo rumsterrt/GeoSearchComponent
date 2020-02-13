@@ -122,7 +122,8 @@ const SearchInput = ({ initOptions = null, initPicked = {}, loadOptions, onClick
                         <ListBox>
                             {isLoading && <Option>Loading...</Option>}
                             {options && options.length === 0 && !isLoading && <Option>Empty</Option>}
-                            {options &&
+                            {!isLoading &&
+                                options &&
                                 options.map((option, index) => (
                                     <Option
                                         key={index}
